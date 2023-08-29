@@ -1,6 +1,5 @@
 package GerenciadorCampeonato.rest;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +9,10 @@ import GerenciadorCampeonato.repository.UsuarioRepository;
 
 import java.security.Principal;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -25,7 +28,7 @@ public class UsuarioController {
     public List<Usuario> getAllUsuarios() {
         return (List<Usuario>) usuarioRepository.findAll();
     }
-    
+
     @GetMapping("/me")
     Principal getMet(Principal me) {
         return me;
@@ -42,7 +45,6 @@ public class UsuarioController {
         return usuarioRepository.saveAndFlush(usuario);
     }
 
-
     @PutMapping("/{email}")
     public Usuario updateUsuario(@PathVariable String email, @RequestBody Usuario novoUsuario) {
         Usuario usuarioExistente = usuarioRepository.findById(email).orElse(null);
@@ -53,11 +55,13 @@ public class UsuarioController {
             usuarioExistente.setAvatar(novoUsuario.getAvatar());
             return usuarioRepository.save(usuarioExistente);
         }
-        return null; 
+        return null;
     }
 
     @DeleteMapping("/{email}")
     public void deleteUsuario(@PathVariable String email) {
         usuarioRepository.deleteById(email);
+
+        
     }
 }

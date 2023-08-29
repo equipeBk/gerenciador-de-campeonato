@@ -36,13 +36,16 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.GET, "/api/usuario/login").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/usuario/{email}").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/usuario/{email}").permitAll()
+
+                .antMatchers(HttpMethod.POST, "/api/competicao").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/competicao").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/competicao/{id}").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/competicao/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/competicao/{id}").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
-                .and().authenticationProvider(authProvider())
-                .logout()
-                    .logoutUrl("/logout") 
-                    .logoutSuccessUrl("/api/usuario") 
-                    .permitAll();
+                .and().authenticationProvider(authProvider());
+                    
 
         return http.build();
     }

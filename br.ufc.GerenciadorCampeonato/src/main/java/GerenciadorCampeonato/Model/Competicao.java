@@ -11,8 +11,10 @@ public class Competicao {
 	@Id
 	@GeneratedValue
 	private int id;
+
 	@ManyToOne
-	private Usuario Usuario;
+	private Usuario usuario;
+
 	private String nome;
 	private String descricao;
 	private String quantTimes;
@@ -65,6 +67,10 @@ public class Competicao {
 
 	public void setFormaCompeticao(String formaCompeticao) {
 		this.formaCompeticao = formaCompeticao;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
